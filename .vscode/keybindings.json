@@ -1,0 +1,44 @@
+[
+    {
+        "key": "f4",
+        "command": "workbench.action.tasks.runTask"
+    },
+    {
+        "key": "f5",
+        "command": "workbench.action.tasks.runTask",
+        "args": "1. Build and Simulate [F5]",
+        "when": "!inDebugMode"
+    },
+    {
+        "key": "f6",
+        "command": "workbench.action.tasks.runTask",
+        "args": "2. Build Only (.hex) [F6]"
+    },
+    {
+        "key": "f7",
+        "command": "workbench.action.tasks.runTask",
+        "args": "3. Simulate Only (PICSimLab) [F7]"
+    },
+    {
+        "key": "f8",
+        "command": "workbench.action.debug.start",
+        "when": "!inDebugMode"
+    },
+    {
+        "key": "ctrl+f8",
+        "command": "workbench.action.tasks.runTask",
+        "args": "6. Live Table Debugger (Terminal) [Ctrl+F8]"
+    },
+    {
+        "key": "f9",
+        "command": "workbench.action.tasks.runTask",
+        "args": "4. Flash to Board - USB PICkit2 [F9]",
+        "when": "!inDebugMode"
+    },
+    {
+        "key": "shift+f9",
+        "command": "workbench.action.tasks.runTask",
+        "args": "5. Build and Flash to Board - USB [Shift+F9]",
+        "when": "!inDebugMode"
+    }
+]

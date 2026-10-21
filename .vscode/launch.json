@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "mplab-core-da",
+            "request": "launch",
+            "name": "PIC16F877A: Debug Active ASM File",
+            "preLaunchTask": "Start PIC16 Debug Server",
+            "device": "PIC16F877A",
+            "tool": "Simulator",
+            "program": "${file}",
+            "debugFiles": [
+                "${workspaceFolder}"
+            ],
+            "cwd": "${fileDirname}",
+            "stopOnEntry": true,
+            "noConfigSelection": true,
+            "mdfpPath": "/tmp",
+            "debugServer": 47123
+        }
+    ]
+}

@@ -1,0 +1,121 @@
+{
+    "debug.allowBreakpointsEverywhere": true,
+    "mplab.platforms.installUsbDrivers": false,
+    "code-runner.showRunIconInEditorTitleMenu": true,
+    "code-runner.runInTerminal": true,
+    "code-runner.saveFileBeforeRun": true,
+    "code-runner.clearPreviousOutput": true,
+    "code-runner.executorMap": {
+        "asm": "cd $dir && gpasm -p 16f877a $fileName && picsimlab \"PICGenios\" \"PIC16F877A\" $fileNameWithoutExt.hex",
+        "pic-as": "cd $dir && gpasm -p 16f877a $fileName && picsimlab \"PICGenios\" \"PIC16F877A\" $fileNameWithoutExt.hex"
+    },
+    "code-runner.executorMapByFileExtension": {
+        ".asm": "cd $dir && gpasm -p 16f877a $fileName && picsimlab \"PICGenios\" \"PIC16F877A\" $fileNameWithoutExt.hex"
+    },
+    "code-runner.customCommand": "cd $dir && gpasm -p 16f877a $fileName && pk2cmd -P PIC16F877A -M -F $fileNameWithoutExt.hex -R",
+    "status-bar-btn.btns": [
+        {
+            "id": "pic-menu",
+            "name": "PIC Menu",
+            "text": "$(list-selection) PIC Menu (F4)",
+            "tooltip": {
+                "value": "### PIC16F877A Action Menu & Shortcut Guide\nClick this button (or press **F4**) to open the interactive action selector.\n\n| Action | Shortcut | Description |\n| :--- | :---: | :--- |\n| **Build & Simulate** | `F5` | Compile `.asm` with `gpasm` & launch `PICSimLab` |\n| **Build Only** | `F6` | `gpasm -p 16f877a <file>.asm` |\n| **Simulate** | `F7` | `picsimlab PICGenios PIC16F877A <file>.hex` |\n| **Debug (Editor)** | `F8` | Line-by-line debugger (`F10`: Step Over, `Shift+F5`: Stop) |\n| **Flash USB** | `F9` | `pk2cmd -P PIC16F877A -M -F <file>.hex -R` |\n| **Build & Flash** | `Shift+F9` | Compile `.asm` then flash to board via USB |\n| **Table Debug** | `Ctrl+F8` | Launch live terminal Register/Port table debugger |\n\n---\n[Open Action Menu (F4)](command:workbench.action.tasks.runTask) | [Start Debugger (F8)](command:workbench.action.debug.start)",
+                "isTrusted": true,
+                "supportThemeIcons": true
+            },
+            "command": "workbench.action.tasks.runTask",
+            "alignment": "left",
+            "priority": 101,
+            "color": "#f59e0b"
+        },
+        {
+            "id": "pic-build",
+            "name": "PIC Build",
+            "text": "$(tools) Build (F6)",
+            "tooltip": {
+                "value": "**Build Active ASM (`F6`)**\nCompiles the active `.asm` file using `gpasm -p 16f877a` and generates `.hex`, `.cod`, and `.lst` files.\n\n*(Press `F4` to open the full PIC Action Menu)*",
+                "isTrusted": true,
+                "supportThemeIcons": true
+            },
+            "command": {
+                "command": "workbench.action.tasks.runTask",
+                "arguments": ["2. Build Only (.hex) [F6]"]
+            },
+            "alignment": "left",
+            "priority": 100,
+            "color": "#38bdf8"
+        },
+        {
+            "id": "pic-simulate",
+            "name": "PIC Simulate",
+            "text": "$(play) Simulate (F7)",
+            "tooltip": {
+                "value": "**Launch Simulator (`F7`)**\nOpens the `.hex` file of the active `.asm` source in **PICSimLab** (`PICGenios` / `PIC16F877A`).\n\nCommand: `picsimlab \"PICGenios\" \"PIC16F877A\" <active_file>.hex`",
+                "isTrusted": true,
+                "supportThemeIcons": true
+            },
+            "command": {
+                "command": "workbench.action.tasks.runTask",
+                "arguments": ["3. Simulate Only (PICSimLab) [F7]"]
+            },
+            "alignment": "left",
+            "priority": 99,
+            "color": "#4ade80"
+        },
+        {
+            "id": "pic-build-and-run",
+            "name": "PIC Build and Run",
+            "text": "$(run-all) Build & Sim (F5)",
+            "tooltip": {
+                "value": "**Build & Simulate (`F5`)**\nCompiles the active `.asm` file and automatically launches **PICSimLab** if the build succeeds.",
+                "isTrusted": true,
+                "supportThemeIcons": true
+            },
+            "command": {
+                "command": "workbench.action.tasks.runTask",
+                "arguments": ["1. Build and Simulate [F5]"]
+            },
+            "alignment": "left",
+            "priority": 98,
+            "color": "#fbbf24"
+        },
+        {
+            "id": "pic-vscode-debug",
+            "name": "PIC VS Code Debug",
+            "text": "$(bug) Debug (F8)",
+            "tooltip": {
+                "value": "**Line-by-Line Debugger (`F8`)**\nStarts the in-editor step-by-step debugger with live Register, Variable, and Port inspection.\n- **F10:** Step Over\n- **F11:** Step Into\n- **F5:** Continue to Breakpoint\n- **Shift+F5:** Stop Debugging\n- **Ctrl+F8:** Open Live Terminal Table Debugger",
+                "isTrusted": true,
+                "supportThemeIcons": true
+            },
+            "command": "workbench.action.debug.start",
+            "alignment": "left",
+            "priority": 97,
+            "color": "#f472b6"
+        },
+        {
+            "id": "pic-flash-usb",
+            "name": "PIC Flash USB",
+            "text": "$(zap) Flash USB (F9)",
+            "tooltip": {
+                "value": "**Flash to Hardware via USB - PICkit2 (`F9`)**\nFlashes the `.hex` output of the active file to a real PIC16F877A board via USB.\n\nCommand: `pk2cmd -P PIC16F877A -M -F <active_file>.hex -R`\n*(Press **Shift+F9** to Build & Flash in one step)*",
+                "isTrusted": true,
+                "supportThemeIcons": true
+            },
+            "command": {
+                "command": "workbench.action.tasks.runTask",
+                "arguments": ["4. Flash to Board - USB PICkit2 [F9]"]
+            },
+            "alignment": "left",
+            "priority": 96,
+            "color": "#fb7185"
+        }
+    ],
+    "memory-inspector.debugTypes": [
+        "arm-debugger",
+        "embedded-debug",
+        "gdb",
+        "gdbtarget",
+        "mplab-core-da"
+    ]
+}

@@ -1,0 +1,104 @@
+{
+    "version": "2.0.0",
+    "options": {
+        "cwd": "${fileDirname}",
+        "shell": {
+            "executable": "/bin/bash",
+            "args": ["-c"]
+        }
+    },
+    "tasks": [
+        {
+            "label": "1. Build and Simulate [F5]",
+            "detail": "Compile active .asm file with gpasm and open in PICSimLab simulator",
+            "type": "shell",
+            "command": "gpasm -p 16f877a \"${fileBasename}\" && picsimlab \"PICGenios\" \"PIC16F877A\" \"${fileBasenameNoExtension}.hex\"",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            }
+        },
+        {
+            "label": "2. Build Only (.hex) [F6]",
+            "detail": "Command: gpasm -p 16f877a <active_file>.asm",
+            "type": "shell",
+            "command": "gpasm -p 16f877a \"${fileBasename}\"",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            }
+        },
+        {
+            "label": "3. Simulate Only (PICSimLab) [F7]",
+            "detail": "Command: picsimlab \"PICGenios\" \"PIC16F877A\" <active_file>.hex",
+            "type": "shell",
+            "command": "picsimlab \"PICGenios\" \"PIC16F877A\" \"${fileBasenameNoExtension}.hex\"",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "4. Flash to Board - USB PICkit2 [F9]",
+            "detail": "Command: pk2cmd -P PIC16F877A -M -F <active_file>.hex -R",
+            "type": "shell",
+            "command": "pk2cmd -P PIC16F877A -M -F \"${fileBasenameNoExtension}.hex\" -R",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            }
+        },
+        {
+            "label": "5. Build and Flash to Board - USB [Shift+F9]",
+            "detail": "Compile active .asm file with gpasm and flash .hex via pk2cmd",
+            "type": "shell",
+            "command": "gpasm -p 16f877a \"${fileBasename}\" && pk2cmd -P PIC16F877A -M -F \"${fileBasenameNoExtension}.hex\" -R",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            }
+        },
+        {
+            "label": "6. Live Table Debugger (Terminal) [Ctrl+F8]",
+            "detail": "Step-by-step terminal debugger with live Register, Variable, and Port LED dashboard",
+            "type": "shell",
+            "command": "python3 \"${workspaceFolder}/.vscode/pic16_terminal_debugger.py\" \"${file}\"",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "focus": true,
+                "clear": true
+            }
+        },
+        {
+            "label": "Start PIC16 Debug Server",
+            "detail": "Background gpsim DAP server for VS Code In-Editor Debugger (F8)",
+            "type": "shell",
+            "command": "python3 \"${workspaceFolder}/.vscode/pic16_debug_adapter.py\" --daemon 47123",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "never",
+                "panel": "shared",
+                "close": true
+            }
+        }
+    ]
+}
